@@ -78,6 +78,6 @@ torch::Tensor BMMExt_forward(
     return result;
 }
 
-PYBIND11_MODULE(lltm, m) {
+PYBIND11_MODULE(BMMExt, m) {
   m.def("forward", &BMMExt_forward, "BMMExt forward test");
 }
