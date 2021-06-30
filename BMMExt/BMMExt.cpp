@@ -52,13 +52,13 @@ torch::Tensor BMMExt_forward(
     int pos = 0;
     for (int i = 0; i < (int)sizemap.sizes()[0]; i++) {
         printf("FUCK 1\n");
-        for (int j = 0; j < (int)sizemap_acc[i] / op_base_size; j++) {
-            printf("FUCK 2\n");
-            weight_arr[pos] = weight_ptr + i * num_in + num_features;
-            bias_arr[pos] = bias_ptr + i * num_features;
-            result_arr[pos] = result_ptr + pos * op_base_size * num_features;
-            pos++;
-        }
+        // for (int j = 0; j < (int)sizemap_acc[i] / op_base_size; j++) {
+        //     printf("FUCK 2\n");
+        //     weight_arr[pos] = weight_ptr + i * num_in + num_features;
+        //     bias_arr[pos] = bias_ptr + i * num_features;
+        //     result_arr[pos] = result_ptr + pos * op_base_size * num_features;
+        //     pos++;
+        // }
     }
     float alpha, beta;
     alpha = 1.0;
