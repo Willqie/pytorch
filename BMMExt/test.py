@@ -11,7 +11,7 @@ if __name__ == "__main__":
     res = BMMExt.op(a, b.permute([0, 2, 1]), s, res, 4, 128)
     
     b_ = b.permute([0,2,1])
-    bb = torch.empty((4, 3, 8)).cuda()
+    bb = torch.empty((4, 8, 3)).cuda()
     bb[0] = b_[0]
     bb[1] = b_[0]
     bb[2] = b_[1]
