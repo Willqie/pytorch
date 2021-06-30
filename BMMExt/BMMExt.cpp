@@ -48,7 +48,7 @@ torch::Tensor BMMExt_forward(
     auto weight_shape = weights.sizes();
     int num_features = weight_shape[2];
     int num_in = weight_shape[1];
-    printf("FUCK!!")
+    printf("FUCK!!");
     auto sizemap_acc = sizemap.accessor<int, 1>(); 
     int pos = 0;
     for (int i = 0; i < (int)sizemap.sizes()[0]; i++) {
