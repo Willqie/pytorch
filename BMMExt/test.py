@@ -24,7 +24,7 @@ if __name__ == "__main__":
     expected = torch.baddbmm(cc, a, bb)
     
     np.testing.assert_allclose(
-                res.numpy().flatten(),
-                expected.numpy().flatten(),
+                res.cpu().numpy().flatten(),
+                expected.cpu().numpy().flatten(),
                 rtol=1e-4
     )
