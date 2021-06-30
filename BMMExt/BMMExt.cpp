@@ -96,10 +96,11 @@ torch::Tensor BMMExt_forward(
     &beta, result_arr, num_features, op_batch_num);
 
     if (stat != CUBLAS_STATUS_SUCCESS) {
+        printf("FFFFFFFF\n")
         fprintf(stderr, "Cannot perform compute \n");
         exit(1);
     }
-    printf("END");
+    printf("END\n");
     return result;
 }
 
