@@ -23,15 +23,15 @@ torch::Tensor BMMExt_forward(
     static cublasStatus_t stat;
     static cublasHandle_t handle;
 
-    // if (cur_batch_num == -1) {
+    if (cur_batch_num == -1) {
         stat = cublasCreate(&handle);
         if (stat != CUBLAS_STATUS_SUCCESS) {
             fprintf(stderr, "Cannot init cublas handle\n");
             exit(1);
         }
-    // }
+    }
     
-    // if (weight_arr == nullptr || cur_batch_num != op_batch_num) {
+    if (weight_arr == nullptr || cur_batch_num != op_batch_num) {
         if (cudaMalloc(&weight_arr, sizeof(float*)*op_batch_num) != cudaSuccess) {
             fprintf(stderr, "cudaMalloc fail\n");
             exit(1);
@@ -48,7 +48,7 @@ torch::Tensor BMMExt_forward(
         result_arr_cpu = (float**)malloc(sizeof(float*)*op_batch_num);
         input_arr_cpu = (float**)malloc(sizeof(float*)*op_batch_num);
         cur_batch_num = op_batch_num;
-    // }
+    }
     
     float* weight_ptr = (float*)weights.data_ptr();
     float* result_ptr = (float*)result.data_ptr();
@@ -58,14 +58,8 @@ torch::Tensor BMMExt_forward(
     int num_in = weight_shape[1];
     float* sizemap_ptr = (float*)sizemap.data_ptr();
     int pos = 0;
-    printf("FUCK 2\n");
-    printf("The size is %d\n", (int)sizemap.sizes()[0]);
-    printf("FUCK 5\n");
     for (int i = 0; i < (int)sizemap.sizes()[0]; i++) {
-        printf("FUCK 4");
-        printf("sizemap_ptr %f\n", sizemap_ptr[i]);
         for (int j = 0; j < ((int)(sizemap_ptr[i])) / op_base_size; j++) {
-            printf("FUCK 3\n");
             input_arr_cpu[pos] = input_ptr + pos * op_base_size * num_in;
             weight_arr_cpu[pos] = weight_ptr + i * num_in * num_features;
             result_arr_cpu[pos] = result_ptr + pos * op_base_size * num_features;

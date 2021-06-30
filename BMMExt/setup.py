@@ -6,7 +6,7 @@ setup(
     ext_modules=[
         CUDAExtension(
             'BMMExt', sources=['BMMExt.cpp'],
-            extra_compile_args = {'cxx': ['-lcubls', '-g']}
+            extra_compile_args = {'cxx': ['-lcubls']}
             )
     ],
     cmdclass={
