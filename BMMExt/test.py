@@ -16,12 +16,13 @@ if __name__ == "__main__":
     bb[2] = b[2]
     bb[3] = b[2]
     
-    cc = torch.empty((4, 10))
+    cc = torch.empty((4, 1, 10))
     cc[0] = c[0]
     cc[1] = c[1]
     cc[2] = c[2]
     cc[3] = c[2]
     expected = torch.baddbmm(cc, a, bb)
+    
     np.testing.assert_allclose(
                 res.numpy().flatten(),
                 expected.numpy().flatten(),
