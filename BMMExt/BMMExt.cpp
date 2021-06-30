@@ -51,7 +51,7 @@ torch::Tensor BMMExt_forward(
 
     auto sizemap_acc = sizemap.accessor<int, 1>(); 
     int pos = 0;
-    for (int i = 0; i < sizemap.size(); i++) {
+    for (int i = 0; i < sizemap.size()[0]; i++) {
         for (int j = 0; j < sizemap_acc[i] / op_base_size; j++) {
             weight_arr[pos] = weight_ptr + i * num_in + num_features;
             bias_arr[pos] = bias_ptr + i * num_features;
