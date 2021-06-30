@@ -50,14 +50,17 @@ torch::Tensor BMMExt_forward(
         result_arr_cpu = (float**)malloc(sizeof(float*)*op_batch_num);
         cur_batch_num = op_batch_num;
     }
+    printf("FUCK 1\n");
     float* weight_ptr = (float*)weights.data_ptr();
     float* bias_ptr = (float*)weights.data_ptr();
     float* result_ptr = (float*)result.data_ptr();
     auto weight_shape = weights.sizes();
     int num_features = weight_shape[2];
     int num_in = weight_shape[1];
+    printf("FUCK 2\n");
     auto sizemap_acc = sizemap.accessor<float, 1>(); 
     int pos = 0;
+    printf("FUCK 3\n");
     for (int i = 0; i < (int)sizemap.sizes()[0]; i++) {
         for (int j = 0; j < (int)sizemap_acc[i] / op_base_size; j++) {
             printf("HERE\n");
