@@ -58,11 +58,11 @@ torch::Tensor BMMExt_forward(
     int num_features = weight_shape[2];
     int num_in = weight_shape[1];
     printf("FUCK 2\n");
-    auto sizemap_acc = sizemap.accessor<float, 1>(); 
+    using torch::indexing;
     int pos = 0;
     printf("FUCK 3\n");
     for (int i = 0; i < (int)sizemap.sizes()[0]; i++) {
-        for (int j = 0; j < (int)sizemap_acc[i] / op_base_size; j++) {
+        for (int j = 0; j < (int)sizemap[i] / op_base_size; j++) {
             printf("HERE\n");
             weight_arr_cpu[pos] = weight_ptr + i * num_in + num_features;
             bias_arr_cpu[pos] = bias_ptr + i * num_features;
