@@ -8,6 +8,7 @@ if __name__ == "__main__":
     s = torch.FloatTensor([16, 16, 32])
     res = torch.zeros((4, 16, 10)).cuda()
     res = BMMExt.op(a, b, s, res, 4, 16)
+    res = BMMExt.op(a, b, s, res, 4, 16)
     
     bb = torch.empty((4, 3, 10)).cuda()
     bb[0] = b[0]
