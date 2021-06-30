@@ -42,9 +42,9 @@ torch::Tensor BMMExt_forward(
         }
         cur_batch_num = op_batch_num;
     }
-    float* weight_ptr = weights.data_ptr();
-    float* bias_ptr = weights.data_ptr();
-    float* result_ptr = result.data_ptr();
+    float* weight_ptr = (float*)weights.data_ptr();
+    float* bias_ptr = (float*)weights.data_ptr();
+    float* result_ptr = (float*)result.data_ptr();
     int num_features = weights.sizes(2);
     int num_in = weights.sizes(1);
 
