@@ -60,6 +60,7 @@ at::Tensor BMMExt_forward(
     int pos = 0;
     printf("FUCK 2\n");
     for (int i = 0; i < (int)sizemap.sizes()[0]; i++) {
+        printf("FUCK 4");
         for (int j = 0; j < ((int)(sizemap_ptr[i])) / op_base_size; j++) {
             printf("FUCK 3\n");
             input_arr_cpu[pos] = input_ptr + pos * op_base_size * num_in;
