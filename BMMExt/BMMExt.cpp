@@ -59,6 +59,8 @@ at::Tensor BMMExt_forward(
     float* sizemap_ptr = (float*)sizemap.data_ptr();
     int pos = 0;
     printf("FUCK 2\n");
+    printf("The size is %d\n", (int)sizemap.sizes()[0]);
+    printf("FUCK 5\n");
     for (int i = 0; i < (int)sizemap.sizes()[0]; i++) {
         printf("FUCK 4");
         for (int j = 0; j < ((int)(sizemap_ptr[i])) / op_base_size; j++) {
