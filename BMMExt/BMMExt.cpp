@@ -54,6 +54,7 @@ torch::Tensor BMMExt_forward(
     float* weight_ptr = (float*)weights.data_ptr();
     float* bias_ptr = (float*)weights.data_ptr();
     float* result_ptr = (float*)result.data_ptr();
+    float* input_ptr = (float*)input_ptr.data_ptr();
     auto weight_shape = weights.sizes();
     int num_features = weight_shape[2];
     int num_in = weight_shape[1];
@@ -92,7 +93,7 @@ torch::Tensor BMMExt_forward(
     num_features, op_base_size, num_in,
     &alpha,
     weight_arr, num_features,
-    input, num_in,
+    input_ptr, num_in,
     &beta, result_arr, num_features, op_batch_num);
 
     if (stat != CUBLAS_STATUS_SUCCESS) {
