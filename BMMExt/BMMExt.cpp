@@ -23,15 +23,15 @@ torch::Tensor BMMExt_forward(
     static cublasStatus_t stat;
     static cublasHandle_t handle;
 
-    if (cur_batch_num == -1) {
+    // if (cur_batch_num == -1) {
         stat = cublasCreate(&handle);
         if (stat != CUBLAS_STATUS_SUCCESS) {
             fprintf(stderr, "Cannot init cublas handle\n");
             exit(1);
         }
-    }
+    // }
     
-    if (weight_arr == nullptr || cur_batch_num != op_batch_num) {
+    // if (weight_arr == nullptr || cur_batch_num != op_batch_num) {
         if (cudaMalloc(&weight_arr, sizeof(float*)*op_batch_num) != cudaSuccess) {
             fprintf(stderr, "cudaMalloc fail\n");
             exit(1);
@@ -48,7 +48,7 @@ torch::Tensor BMMExt_forward(
         result_arr_cpu = (float**)malloc(sizeof(float*)*op_batch_num);
         input_arr_cpu = (float**)malloc(sizeof(float*)*op_batch_num);
         cur_batch_num = op_batch_num;
-    }
+    // }
     
     float* weight_ptr = (float*)weights.data_ptr();
     float* result_ptr = (float*)result.data_ptr();
