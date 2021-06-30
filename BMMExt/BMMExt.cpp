@@ -2,6 +2,7 @@
 #include <torch/extension.h>
 
 #include <stdio.h>
+#include <stdlib.h>
 #include <cuda_runtime.h>
 #include "cublas_v2.h"
 
@@ -15,6 +16,9 @@ torch::Tensor BMMExt_forward(
     static float** weight_arr = nullptr;
     static float** bias_arr = nullptr;
     static float** result_arr = nullptr;
+    static float** weight_arr_cpu = nullptr;
+    static float** bias_arr_cpu = nullptr;
+    static float** result_arr_cpu = nullptr;
     static int cur_batch_num = -1;
     static cublasStatus_t stat;
     cublasHandle_t handle;
@@ -41,6 +45,9 @@ torch::Tensor BMMExt_forward(
             fprintf(stderr, "cudaMalloc fail\n");
             exit(1);
         }
+        weight_arr_cpu = (float**)malloc(sizeof(float*)*op_batch_num);
+        bias_arr_cpu = (float**)malloc(sizeof(float*)*op_batch_num);
+        result_arr_cpu = (float**)malloc(sizeof(float*)*op_batch_num);
         cur_batch_num = op_batch_num;
     }
     float* weight_ptr = (float*)weights.data_ptr();
@@ -53,11 +60,23 @@ torch::Tensor BMMExt_forward(
     int pos = 0;
     for (int i = 0; i < (int)sizemap.sizes()[0]; i++) {
         for (int j = 0; j < (int)sizemap_acc[i] / op_base_size; j++) {
-            weight_arr[pos] = weight_ptr + i * num_in + num_features;
-            bias_arr[pos] = bias_ptr + i * num_features;
-            result_arr[pos] = result_ptr + pos * op_base_size * num_features;
+            weight_arr_cpu[pos] = weight_ptr + i * num_in + num_features;
+            bias_arr_cpu[pos] = bias_ptr + i * num_features;
+            result_arr_cpu[pos] = result_ptr + pos * op_base_size * num_features;
             pos++;
         }
+    }
+    if (cudaMemcpy(weight_arr, weight_arr_cpu, sizeof(float*)*op_batch_num, cudaMemcpyHostToDevice) != cudaSuccess) {
+        fprintf(stderr, "Copy failed\n");
+        exit(1);
+    }
+    if (cudaMemcpy(bias_arr, bias_arr_cpu, sizeof(float*)*op_batch_num, cudaMemcpyHostToDevice) != cudaSuccess) {
+        fprintf(stderr, "Copy failed\n");
+        exit(1);
+    }
+    if (cudaMemcpy(result_arr, bias_arr_cpu, sizeof(float*)*op_batch_num, cudaMemcpyHostToDevice) != cudaSuccess) {
+        fprintf(stderr, "Copy failed\n");
+        exit(1);
     }
     float alpha, beta;
     alpha = 1.0;
