@@ -18,7 +18,7 @@ torch::Tensor BMMExt_forward(
     static int cur_batch_num = -1;
     static cublasStatus_t stat;
     cublasHandle_t handle;
-    printf("FUCK 0\n");
+    printf("FUCK ff\n");
 
     if (cur_batch_num == -1) {
         stat = cublasCreate(&handle);
@@ -49,7 +49,7 @@ torch::Tensor BMMExt_forward(
     auto weight_shape = weights.sizes();
     int num_features = weight_shape[2];
     int num_in = weight_shape[1];
-    auto sizemap_acc = sizemap.accessor<int, 1>(); 
+    auto sizemap_acc = sizemap.accessor<float, 1>(); 
     int pos = 0;
     printf("FUCK 1\n");
     // for (int i = 0; i < (int)sizemap.sizes()[0]; i++) {
