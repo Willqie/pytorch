@@ -81,7 +81,6 @@ torch::Tensor BMMExt_forward(
     float alpha, beta;
     alpha = 1.0;
     beta = 0.0;
-    printf("FUCK 3\n");
     stat = cublasSgemmBatched(handle,
     CUBLAS_OP_N, CUBLAS_OP_N,
     num_features, op_base_size, num_in,
