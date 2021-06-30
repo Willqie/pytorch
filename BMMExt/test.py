@@ -3,17 +3,17 @@ import BMMExt
 import numpy as np
 
 if __name__ == "__main__":
-    a = torch.rand((4, 16, 3)).cuda()
-    b = torch.rand((3, 3, 10)).cuda()
-    s = torch.FloatTensor([16, 16, 32])
-    res = torch.zeros((4, 16, 10)).cuda()
-    res = BMMExt.op(a, b, s, res, 4, 16)
-    res = BMMExt.op(a, b, s, res, 4, 16)
+    a = torch.rand((4, 128, 3)).cuda()
+    b = torch.rand((3, 3, 8)).cuda()
+    s = torch.FloatTensor([256, 128, 128])
+    res = torch.zeros((4, 128, 8)).cuda()
+    res = BMMExt.op(a, b, s, res, 4, 128)
+    res = BMMExt.op(a, b, s, res, 4, 128)
     
-    bb = torch.empty((4, 3, 10)).cuda()
+    bb = torch.empty((4, 3, 8)).cuda()
     bb[0] = b[0]
-    bb[1] = b[1]
-    bb[2] = b[2]
+    bb[1] = b[0]
+    bb[2] = b[1]
     bb[3] = b[2]
     
     expected = torch.bmm(a, bb)
