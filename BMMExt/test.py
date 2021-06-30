@@ -4,11 +4,11 @@ import numpy as np
 
 if __name__ == "__main__":
     a = torch.rand((4, 128, 8)).cuda()
-    b = torch.rand((3, 3, 8)).cuda()
+    b = torch.rand((3, 8, 3)).cuda()
     s = torch.FloatTensor([256, 128, 128])
     res = torch.zeros((4, 128, 3)).cuda()
 
-    b_ = b.permute([0, 2, 1]).contiguous()
+    b_ = b
     res = BMMExt.op(a, b_, s, res, 4, 128)
     res = BMMExt.op(a, b_, s, res, 4, 128)
     
