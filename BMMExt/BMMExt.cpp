@@ -60,6 +60,7 @@ torch::Tensor BMMExt_forward(
     int pos = 0;
     for (int i = 0; i < (int)sizemap.sizes()[0]; i++) {
         for (int j = 0; j < (int)sizemap_acc[i] / op_base_size; j++) {
+            printf("HERE\n");
             weight_arr_cpu[pos] = weight_ptr + i * num_in + num_features;
             bias_arr_cpu[pos] = bias_ptr + i * num_features;
             result_arr_cpu[pos] = result_ptr + pos * op_base_size * num_features;
