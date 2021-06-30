@@ -8,7 +8,7 @@ if __name__ == "__main__":
     c = torch.ones((3, 10)).cuda()
     s = torch.FloatTensor([16, 16, 32])
     res = torch.zeros((4, 16, 10)).cuda()
-    BMMExt.forward(a, b, s, c, res, 4, 16)
+    res = BMMExt.forward(a, b, s, c, res, 4, 16)
     
     bb = torch.empty((4, 3, 10)).cuda()
     bb[0] = b[0]

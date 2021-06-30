@@ -99,6 +99,7 @@ torch::Tensor BMMExt_forward(
         fprintf(stderr, "Cannot perform compute \n");
         exit(1);
     }
+    printf("END");
     return result;
 }
 
