@@ -92,7 +92,7 @@ torch::Tensor BMMExt_forward(
     num_features, op_base_size, num_in,
     &alpha,
     weight_arr, num_features,
-    result_arr, num_in,
+    input_arr, num_in,
     &beta, result_arr, num_features, op_batch_num);
 
     if (stat != CUBLAS_STATUS_SUCCESS) {
