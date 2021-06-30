@@ -24,7 +24,6 @@ torch::Tensor BMMExt_forward(
     static int cur_batch_num = -1;
     static cublasStatus_t stat;
     cublasHandle_t handle;
-    printf("FUCK ff\n");
 
     if (cur_batch_num == -1) {
         stat = cublasCreate(&handle);
@@ -57,7 +56,7 @@ torch::Tensor BMMExt_forward(
         input_arr_cpu = (float**)malloc(sizeof(float*)*op_batch_num);
         cur_batch_num = op_batch_num;
     }
-    printf("FUCK 1\n");
+    
     float* weight_ptr = (float*)weights.data_ptr();
     float* bias_ptr = (float*)weights.data_ptr();
     float* result_ptr = (float*)result.data_ptr();
@@ -66,13 +65,9 @@ torch::Tensor BMMExt_forward(
     int num_features = weight_shape[2];
     int num_in = weight_shape[1];
     float* sizemap_ptr = (float*)sizemap.data_ptr();
-    printf("FUCK 2\n");
     int pos = 0;
-    printf("FUCK 3\n");
     for (int i = 0; i < (int)sizemap.sizes()[0]; i++) {
-        printf("HERE\n");
         for (int j = 0; j < ((int)(sizemap_ptr[i])) / op_base_size; j++) {
-            printf("HERE II\n");
             input_arr_cpu[pos] = input_ptr + pos * op_base_size * num_in;
             weight_arr_cpu[pos] = weight_ptr + i * num_in + num_features;
             bias_arr_cpu[pos] = bias_ptr + i * num_features;
@@ -109,11 +104,9 @@ torch::Tensor BMMExt_forward(
     &beta, result_arr, num_features, op_batch_num);
 
     if (stat != CUBLAS_STATUS_SUCCESS) {
-        printf("FFFFFFFF\n");
         fprintf(stderr, "Cannot perform compute \n");
         exit(1);
     }
-    printf("END\n");
     return result;
 }
 
