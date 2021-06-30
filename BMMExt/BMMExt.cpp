@@ -7,11 +7,11 @@
 #include "cublas_v2.h"
 
 
-at::Tensor BMMExt_forward(
-    at::Tensor input,
-    at::Tensor weights,
-    at::Tensor sizemap,
-    at::Tensor result,int op_batch_num, int op_base_size) {
+torch::Tensor BMMExt_forward(
+    torch::Tensor input,
+    torch::Tensor weights,
+    torch::Tensor sizemap,
+    torch::Tensor result,int op_batch_num, int op_base_size) {
 
     static float** weight_arr = nullptr;
     static float** result_arr = nullptr;
