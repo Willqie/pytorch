@@ -21,7 +21,7 @@ torch::Tensor BMMExt_forward(
     static float** input_arr_cpu = nullptr;
     static int cur_batch_num = -1;
     static cublasStatus_t stat;
-    cublasHandle_t handle;
+    static cublasHandle_t handle;
 
     if (cur_batch_num == -1) {
         stat = cublasCreate(&handle);
