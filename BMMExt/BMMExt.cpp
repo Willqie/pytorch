@@ -79,7 +79,7 @@ torch::Tensor BMMExt_forward(
         fprintf(stderr, "Copy failed\n");
         exit(1);
     }
-    if (cudaMemcpy(result_arr, bias_arr_cpu, sizeof(float*)*op_batch_num, cudaMemcpyHostToDevice) != cudaSuccess) {
+    if (cudaMemcpy(result_arr, result_arr_cpu, sizeof(float*)*op_batch_num, cudaMemcpyHostToDevice) != cudaSuccess) {
         fprintf(stderr, "Copy failed\n");
         exit(1);
     }
