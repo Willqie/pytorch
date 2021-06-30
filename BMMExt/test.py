@@ -7,10 +7,12 @@ if __name__ == "__main__":
     b = torch.rand((3, 3, 8)).cuda()
     s = torch.FloatTensor([256, 128, 128])
     res = torch.zeros((4, 128, 3)).cuda()
-    res = BMMExt.op(a, b.permute([0, 2, 1]), s, res, 4, 128)
-    res = BMMExt.op(a, b.permute([0, 2, 1]), s, res, 4, 128)
-    
+
     b_ = b.permute([0, 2, 1]).contiguous()
+    res = BMMExt.op(a, b_, s, res, 4, 128)
+    res = BMMExt.op(a, b_, s, res, 4, 128)
+    
+    
     print(b_.is_contiguous())
     bb = torch.empty((4, 8, 3)).cuda()
     bb[0] = b_[0]
