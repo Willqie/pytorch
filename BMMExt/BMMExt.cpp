@@ -54,7 +54,7 @@ torch::Tensor BMMExt_forward(
     float* weight_ptr = (float*)weights.data_ptr();
     float* bias_ptr = (float*)weights.data_ptr();
     float* result_ptr = (float*)result.data_ptr();
-    float* input_ptr = (float*)input.data_ptr();
+    const float* input_ptr = (const float*)input.data_ptr();
     auto weight_shape = weights.sizes();
     int num_features = weight_shape[2];
     int num_in = weight_shape[1];
