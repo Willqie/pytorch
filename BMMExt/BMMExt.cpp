@@ -62,13 +62,14 @@ torch::Tensor BMMExt_forward(
     int pos = 0;
     printf("FUCK 3\n");
     for (int i = 0; i < (int)sizemap.sizes()[0]; i++) {
-        for (int j = 0; j < ((int)sizemap_ptr[i]) / op_base_size; j++) {
-            printf("HERE\n");
-            weight_arr_cpu[pos] = weight_ptr + i * num_in + num_features;
-            bias_arr_cpu[pos] = bias_ptr + i * num_features;
-            result_arr_cpu[pos] = result_ptr + pos * op_base_size * num_features;
-            pos++;
-        }
+        printf("HERE\n");
+        // for (int j = 0; j < ((int)sizemap_ptr[i]) / op_base_size; j++) {
+        //     printf("HERE\n");
+        //     weight_arr_cpu[pos] = weight_ptr + i * num_in + num_features;
+        //     bias_arr_cpu[pos] = bias_ptr + i * num_features;
+        //     result_arr_cpu[pos] = result_ptr + pos * op_base_size * num_features;
+        //     pos++;
+        // }
     }
     if (cudaMemcpy(weight_arr, weight_arr_cpu, sizeof(float*)*op_batch_num, cudaMemcpyHostToDevice) != cudaSuccess) {
         fprintf(stderr, "Copy failed\n");
