@@ -16,10 +16,10 @@ torch::Tensor BMMExt_forward(
     static float** bias_arr = nullptr;
     static float** result_arr = nullptr;
     static int cur_batch_num = -1;
-    static cublasStatus_t stat = NULL;
-    cublasHandle_t handle = NULL;
+    static cublasStatus_t stat;
+    cublasHandle_t handle;
 
-    if (stat == NULL) {
+    if (cur_batch_num == -1) {
         stat = cublasCreate(&handle);
         if (stat != CUBLAS_STATUS_SUCCESS) {
             fprintf(stderr, "Cannot init cublas handle\n");
