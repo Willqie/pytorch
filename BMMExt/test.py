@@ -6,7 +6,7 @@ if __name__ == "__main__":
     a = torch.rand((4, 128, 8)).cuda()
     b = torch.rand((3, 8, 3)).cuda()
     s = torch.FloatTensor([256, 128, 128])
-    bias = torch.zeros((3, 3)).cuda()
+    bias = torch.rand((3, 3)).cuda()
     bias_multiplier = torch.ones((128, )).cuda()
     res = torch.zeros((4, 128, 3)).cuda()
 
