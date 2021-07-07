@@ -125,7 +125,7 @@ torch::Tensor BMMExt_forward(
 
     beta = 1.0;
     stat = cublasSgemmBatched(handle,
-    CUBLAS_OP_T, CUBLAS_OP_N,
+    CUBLAS_OP_N, CUBLAS_OP_N,
     num_features, op_base_size, 1,
     &alpha,
     bias_arr, num_features,
