@@ -28,7 +28,8 @@ if __name__ == "__main__":
     bias_[2] = bias[1]
     bias_[3] = bias[2]
     
-    expected = torch.baddbmm(bias_, a, bb)
+    expected = torch.bmm(a, bb)
+    expected += bias_
     
     np.testing.assert_allclose(
                 res.cpu().numpy().flatten(),
