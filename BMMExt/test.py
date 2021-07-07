@@ -3,7 +3,7 @@ import BMMExt
 import numpy as np
 
 if __name__ == "__main__":
-    a = torch.rand((4, 128, 8)).cuda()
+    a = torch.zeros((4, 128, 8)).cuda()
     b = torch.rand((3, 8, 3)).cuda()
     s = torch.FloatTensor([256, 128, 128])
     bias = torch.rand((3, 3)).cuda()
