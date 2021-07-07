@@ -30,7 +30,7 @@ if __name__ == "__main__":
     
     expected = torch.bmm(a, bb)
     expected += bias_
-    print(bias)
+    # print(bias)
     
     np.testing.assert_allclose(
                 res.cpu().numpy().flatten(),
