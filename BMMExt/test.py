@@ -11,8 +11,8 @@ if __name__ == "__main__":
     res = torch.zeros((4, 128, 3)).cuda()
 
     b_ = b
-    res = BMMExt.op(a, b_, s, res, bias, bias_multiplier, 4, 128)
-    res = BMMExt.op(a, b_, s, res, bias, bias_multiplier, 4, 128)
+    res = BMMExt.op_biased(a, b_, s, res, bias, bias_multiplier, 4, 128)
+    res = BMMExt.op_biased(a, b_, s, res, bias, bias_multiplier, 4, 128)
     
     
     print(b_.is_contiguous())
