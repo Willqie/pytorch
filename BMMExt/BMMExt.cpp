@@ -262,7 +262,7 @@ torch::Tensor BMMExt_forward_optimized(
         }
         weight_arr = tmp_ptr + 0 * op_batch_num;
         result_arr = tmp_ptr + 1 * op_batch_num;
-        input_arr  = tmp_ptr + 2 * op_batch_num);
+        input_arr  = tmp_ptr + 2 * op_batch_num;
         weight_arr_cpu = (float**)malloc(3*sizeof(float*)*op_batch_num);
         result_arr_cpu = weight_arr_cpu + 1 * op_batch_num;
         input_arr_cpu = weight_arr_cpu + 2 * op_batch_num;
